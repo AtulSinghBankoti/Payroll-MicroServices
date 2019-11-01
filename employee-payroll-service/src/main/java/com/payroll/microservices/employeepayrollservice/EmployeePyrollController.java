@@ -1,5 +1,7 @@
 package com.payroll.microservices.employeepayrollservice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,9 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
 @RestController
 public class EmployeePyrollController {
 
+	private static final Logger logger = LoggerFactory.getLogger(EmployeePyrollController.class);
+	
 	@Autowired
 	EmployeePayrollRepository employeePayrollRepository; 
 	
@@ -22,6 +27,8 @@ public class EmployeePyrollController {
 	@PostMapping("/employee/{empId}/role/{roleName}")
 	public EmployeePayroll insertEmployeePayrollDtails(@PathVariable Long empId, 
 			@PathVariable String roleName) {
+		
+		logger.info("inside insertEmployeePayrollDtails...");
 		//ResponseEntity<EmployeePayroll> employeeEntity = new RestTemplate().getForEntity("http://localhost:8081/employee/{empId}", EmployeePayroll.class,
 		//		empId);
 		
